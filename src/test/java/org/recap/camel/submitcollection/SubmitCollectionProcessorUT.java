@@ -400,6 +400,16 @@ public class SubmitCollectionProcessorUT extends BaseTestCaseUT {
     }
 
     @Test
+    public void performIndexingToRemoveBibsTest(){
+        Map<String, String> idMap = new HashMap<>();
+        idMap.put("1","1");
+        List<Map<String, String>> idMapToRemoveIndexList = new ArrayList<>();
+        List<Map<String, String>> bibIdMapToRemoveIndexList = new ArrayList<>();
+        bibIdMapToRemoveIndexList.add(idMap);
+        ReflectionTestUtils.invokeMethod(submitCollectionProcessor,"performIndexingToRemoveBibs",idMapToRemoveIndexList,bibIdMapToRemoveIndexList);
+    }
+
+    @Test
     public void performIndexingToRemoveBibsException(){
         Map<String, String> idMap = new HashMap<>();
         idMap.put("1","1");
@@ -407,6 +417,17 @@ public class SubmitCollectionProcessorUT extends BaseTestCaseUT {
         idMapToRemoveIndexList.add(idMap);
         List<Map<String, String>> bibIdMapToRemoveIndexList = new ArrayList<>();
         bibIdMapToRemoveIndexList.add(idMap);
+        Mockito.doThrow(new NullPointerException()).when(submitCollectionBatchService).removeBibFromSolrIndex(bibIdMapToRemoveIndexList);
+        ReflectionTestUtils.invokeMethod(submitCollectionProcessor,"performIndexingToRemoveBibs",idMapToRemoveIndexList,bibIdMapToRemoveIndexList);
+    }
+
+    @Test
+    public void performIndexingToRemoveBibsExceptionTest(){
+        Map<String, String> idMap = new HashMap<>();
+        idMap.put("1","1");
+        List<Map<String, String>> idMapToRemoveIndexList = new ArrayList<>();
+        idMapToRemoveIndexList.add(idMap);
+        List<Map<String, String>> bibIdMapToRemoveIndexList = new ArrayList<>();
         Mockito.doThrow(new NullPointerException()).when(submitCollectionBatchService).removeBibFromSolrIndex(bibIdMapToRemoveIndexList);
         ReflectionTestUtils.invokeMethod(submitCollectionProcessor,"performIndexingToRemoveBibs",idMapToRemoveIndexList,bibIdMapToRemoveIndexList);
     }
@@ -430,6 +451,17 @@ public class SubmitCollectionProcessorUT extends BaseTestCaseUT {
         Mockito.when(commonUtil.collectFuturesAndUpdateMAQualifier(futures)).thenReturn(bibIds);
         ReflectionTestUtils.invokeMethod(submitCollectionProcessor,"collectFuturesAndProcess",futures);
     }
+
+    @Test
+    public void collectFuturesAndProcessTest(){
+        List<Future> futures = new ArrayList<>();
+        Set<Integer> bibIds = new HashSet<>();
+        ReflectionTestUtils.setField(submitCollectionProcessor,"solrMaxDocSizeToUsePartialIndex",3);
+        Mockito.when(submitCollectionBatchService.indexData(any())).thenReturn("test");
+        Mockito.when(commonUtil.collectFuturesAndUpdateMAQualifier(futures)).thenReturn(bibIds);
+        ReflectionTestUtils.invokeMethod(submitCollectionProcessor,"collectFuturesAndProcess",futures);
+    }
+
 
     @Test
     public void getReportDataRequest(){
