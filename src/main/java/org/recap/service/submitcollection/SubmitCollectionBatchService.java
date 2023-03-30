@@ -54,15 +54,19 @@ public class SubmitCollectionBatchService extends SubmitCollectionService {
     @Value("${" + PropertyKeyConstants.SUBMIT_COLLECTION_PARTITION_SIZE + "}")
     private Integer partitionSize;
 
+    @Value("${" + PropertyKeyConstants.SUBMIT_COLLECTION_CGD_NO_PROTECTION_INPUT_LIMIT + "}")
+    private Integer cgdNoProtectionInputLimit;
+
     @Override
     public String processMarc(String inputRecords, Set<Integer> processedBibIds, Map<String, List<SubmitCollectionReportInfo>> submitCollectionReportInfoMap, List<Map<String, String>> idMapToRemoveIndexList, List<Map<String, String>> bibIdMapToRemoveIndexList, boolean checkLimit
             , boolean isCGDProtection, InstitutionEntity institutionEntity, Set<String> updatedDummyRecordOwnInstBibIdSet, ExecutorService executorService, List<Future> futures) {
         log.info("inside SubmitCollectionBatchService");
+        log.info("isCGDProtection in ProceeMarc SubmitCollection Batch Service" + isCGDProtection);
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
         String format = ScsbConstants.FORMAT_MARC;
         List<Record> recordList = new ArrayList<>();
-        String invalidMessage = getMarcUtil().convertAndValidateXml(inputRecords, checkLimit, recordList);
+        String invalidMessage = getMarcUtil().convertAndValidateXml(inputRecords, checkLimit, recordList, isCGDProtection);
         if (invalidMessage == null) {
             List<BibliographicEntity> validBibliographicEntityList = new ArrayList<>();
             for (Record record : recordList) {
@@ -150,11 +154,16 @@ public class SubmitCollectionBatchService extends SubmitCollectionService {
         String format;
         format = ScsbConstants.FORMAT_SCSB;
         BibRecords bibRecords = null;
+        log.info("isCGDProtection in ProceeScsb SubmitCollection Batch Service" + isCGDProtected);
+
         try {
             bibRecords = commonUtil.extractBibRecords(inputRecords);
             log.info("bibrecord size {}", bibRecords.getBibRecordList().size());
             if (checkLimit && bibRecords.getBibRecordList().size() > inputLimit) {
                 return ScsbConstants.SUBMIT_COLLECTION_LIMIT_EXCEED_MESSAGE + " " + inputLimit;
+            }
+            if (!isCGDProtected && bibRecords.getBibRecordList().size() > cgdNoProtectionInputLimit) {
+                return ScsbConstants.SUBMIT_COLLECTION_LIMIT_EXCEED_MESSAGE + " " + cgdNoProtectionInputLimit;
             }
         } catch (JAXBException e) {
             log.info(String.valueOf(e.getCause()));

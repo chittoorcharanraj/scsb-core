@@ -88,6 +88,10 @@ public class SubmitCollectionService {
     @Value("${" + PropertyKeyConstants.SUBMIT_COLLECTION_SOLR_PARTIAL_INDEX_DOCS_SIZE + ":10000}")
     private int solrPartialIndexDocsPerThreadSize;
 
+    @Value("${" + PropertyKeyConstants.SUBMIT_COLLECTION_CGD_NO_PROTECTION_INPUT_LIMIT + "}")
+    private Integer cgdNoProtectionInputLimit;
+
+
     /**
      * Process string.
      *
@@ -103,6 +107,9 @@ public class SubmitCollectionService {
     public List<SubmitCollectionResponse> process(String institutionCode, String inputRecords, Set<Integer> processedBibIds, List<Map<String, String>> idMapToRemoveIndexList, List<Map<String, String>> bibIdMapToRemoveIndexList, String xmlFileName, List<Integer> reportRecordNumberList, boolean checkLimit
             , boolean isCGDProtected, Set<String> updatedDummyRecordOwnInstBibIdSet, Exchange exchange, ExecutorService executorService, List<Future> futures) {
         log.info("Submit Collection : Input record processing started");
+        log.info("xmlFileName >>>>>> " + xmlFileName);
+        log.info("isCGDProtected >>>>>> " + isCGDProtected);
+
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
         String response = null;
@@ -175,7 +182,7 @@ public class SubmitCollectionService {
         stopWatch.start();
         String format = ScsbConstants.FORMAT_MARC;
         List<Record> records = new ArrayList<>();
-        String invalidMessage = getMarcUtil().convertAndValidateXml(inputRecords, checkLimit, records);
+        String invalidMessage = getMarcUtil().convertAndValidateXml(inputRecords, checkLimit, records, isCGDProtection);
         if (invalidMessage == null) {
             if (CollectionUtils.isNotEmpty(records)) {
                 int count = 1;
@@ -204,10 +211,16 @@ public class SubmitCollectionService {
         String format;
         format = ScsbConstants.FORMAT_SCSB;
         BibRecords bibRecords = null;
+        log.info("isCGDProtected processSCSB in SubmitCollectionService >>>>>> " + isCGDProtected);
+        log.info("cgdNoProtectionInputLimit >>>>> " + cgdNoProtectionInputLimit);
+        log.info("bibRecords.getBibRecordList().size() >>>>>> " + bibRecords.getBibRecordList().size());
         try {
             bibRecords = commonUtil.extractBibRecords(inputRecords);
             if (checkLimit && bibRecords.getBibRecordList().size() > inputLimit) {
                 return ScsbConstants.SUBMIT_COLLECTION_LIMIT_EXCEED_MESSAGE + " " + inputLimit;
+            }
+            if (!isCGDProtected && bibRecords.getBibRecordList().size() > cgdNoProtectionInputLimit) {
+                return ScsbConstants.SUBMIT_COLLECTION_LIMIT_EXCEED_MESSAGE + " " + cgdNoProtectionInputLimit;
             }
         } catch (JAXBException e) {
             log.info(String.valueOf(e.getCause()));

@@ -242,7 +242,7 @@ public class SharedCollectionRestControllerUT extends BaseTestCaseUT {
         Mockito.when(validationService.validateInstitution(Mockito.anyString())).thenReturn(true);
         Mockito.when(submitCollectionBatchService.processMarc(Mockito.anyString(),Mockito.anySet(),Mockito.anyMap(),Mockito.anyList(),Mockito.anyList(),Mockito.anyBoolean(),Mockito.anyBoolean(),Mockito.any(),Mockito.anySet(),Mockito.any(),Mockito.anyList())).thenCallRealMethod();
         Mockito.when(submitCollectionBatchService.getMarcUtil()).thenReturn(marcUtil);
-        Mockito.when(marcUtil.convertAndValidateXml(Mockito.anyString(),Mockito.anyBoolean(),Mockito.anyList())).thenCallRealMethod();
+        Mockito.when(marcUtil.convertAndValidateXml(Mockito.anyString(),Mockito.anyBoolean(),Mockito.anyList(), Mockito.anyBoolean())).thenCallRealMethod();
         Mockito.when(marcUtil.convertMarcXmlToRecord(Mockito.anyString())).thenCallRealMethod();
         ReflectionTestUtils.setField(marcUtil,"inputLimit",2);
         ReflectionTestUtils.setField(submitCollectionBatchService,"partitionSize",5000);

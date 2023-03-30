@@ -217,7 +217,7 @@ public class SubmitCollectionBatchServiceUT extends BaseTestCaseUT {
         recordList.add(record);
         ReflectionTestUtils.setField(marcUtil,"inputLimit",2);
         ReflectionTestUtils.setField(submitCollectionBatchService,"partitionSize",5000);
-        Mockito.when(marcUtil.convertAndValidateXml(Mockito.anyString(),Mockito.anyBoolean(),Mockito.anyList())).thenCallRealMethod();
+        Mockito.when(marcUtil.convertAndValidateXml(Mockito.anyString(),Mockito.anyBoolean(),Mockito.anyList(), Mockito.anyBoolean())).thenCallRealMethod();
         Mockito.when(marcUtil.convertMarcXmlToRecord(Mockito.anyString())).thenCallRealMethod();
         Map responseMap=new HashMap();
         StringBuilder stringBuilder=new StringBuilder();
@@ -250,7 +250,7 @@ public class SubmitCollectionBatchServiceUT extends BaseTestCaseUT {
         Set<String> updatedDummyRecordOwnInstBibIdSet = new HashSet<>();
         InstitutionEntity institutionEntity = new InstitutionEntity();
         List<Record> recordList = new ArrayList<>();
-        Mockito.when(marcUtil.convertAndValidateXml(inputRecords, checkLimit, recordList)).thenReturn(ScsbConstants.SUBMIT_COLLECTION_LIMIT_EXCEED_MESSAGE);
+        Mockito.when(marcUtil.convertAndValidateXml(inputRecords, checkLimit, recordList, isCGDProtection)).thenReturn(ScsbConstants.SUBMIT_COLLECTION_LIMIT_EXCEED_MESSAGE);
         String result = submitCollectionBatchService.processMarc(inputRecords, processedBibIds,submitCollectionReportInfoMap,idMapToRemoveIndexList,bibIdMapToRemoveIndexList,checkLimit,isCGDProtection,institutionEntity,updatedDummyRecordOwnInstBibIdSet,executorService,futures);
         assertEquals(ScsbConstants.SUBMIT_COLLECTION_LIMIT_EXCEED_MESSAGE,result);
     }
