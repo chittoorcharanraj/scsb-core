@@ -834,7 +834,7 @@ public class SubmitCollectionServiceUT extends BaseTestCaseUT {
         Mockito.when(repositoryService.getReportDetailRepository()).thenCallRealMethod();
         Mockito.when(institutionDetailsRepository.findByInstitutionCode(Mockito.anyString())).thenReturn(getInstitutionEntity());
         ReflectionTestUtils.setField(marcUtil,"inputLimit",1);
-        Mockito.when(marcUtil.convertAndValidateXml(Mockito.anyString(),Mockito.anyBoolean(),Mockito.anyList())).thenCallRealMethod();
+        Mockito.when(marcUtil.convertAndValidateXml(Mockito.anyString(),Mockito.anyBoolean(),Mockito.anyList(),Mockito.anyBoolean())).thenCallRealMethod();
         Mockito.when(marcUtil.convertMarcXmlToRecord(Mockito.anyString())).thenCallRealMethod();
         Map responseMap=new HashMap();
         StringBuilder stringBuilder=new StringBuilder();
@@ -923,7 +923,7 @@ public class SubmitCollectionServiceUT extends BaseTestCaseUT {
         Mockito.when(repositoryService.getReportDetailRepository()).thenCallRealMethod();
         Mockito.when(institutionDetailsRepository.findByInstitutionCode(Mockito.anyString())).thenReturn(getInstitutionEntity());
         ReflectionTestUtils.setField(marcUtil,"inputLimit",1);
-        Mockito.when(marcUtil.convertAndValidateXml(Mockito.anyString(),Mockito.anyBoolean(),Mockito.anyList())).thenCallRealMethod();
+        Mockito.when(marcUtil.convertAndValidateXml(Mockito.anyString(),Mockito.anyBoolean(),Mockito.anyList(), Mockito.anyBoolean())).thenCallRealMethod();
         Mockito.when(marcUtil.convertMarcXmlToRecord(Mockito.anyString())).thenCallRealMethod();
         Map responseMap=new HashMap();
         StringBuilder stringBuilder=new StringBuilder();
@@ -976,7 +976,7 @@ public class SubmitCollectionServiceUT extends BaseTestCaseUT {
         Mockito.when(repositoryService.getReportDetailRepository()).thenCallRealMethod();
         Mockito.when(institutionDetailsRepository.findByInstitutionCode(Mockito.anyString())).thenReturn(getInstitutionEntity());
         ReflectionTestUtils.setField(marcUtil,"inputLimit",1);
-        Mockito.when(marcUtil.convertAndValidateXml(Mockito.anyString(),Mockito.anyBoolean(),Mockito.anyList())).thenCallRealMethod();
+        Mockito.when(marcUtil.convertAndValidateXml(Mockito.anyString(),Mockito.anyBoolean(),Mockito.anyList(), Mockito.anyBoolean())).thenCallRealMethod();
         Mockito.when(marcUtil.convertMarcXmlToRecord(Mockito.anyString())).thenCallRealMethod();
         Map responseMap=new HashMap();
         StringBuilder stringBuilder=new StringBuilder();
@@ -1030,7 +1030,7 @@ public class SubmitCollectionServiceUT extends BaseTestCaseUT {
         Mockito.when(repositoryService.getReportDetailRepository()).thenCallRealMethod();
         Mockito.when(institutionDetailsRepository.findByInstitutionCode(Mockito.anyString())).thenReturn(getInstitutionEntity());
         ReflectionTestUtils.setField(marcUtil,"inputLimit",1);
-        Mockito.when(marcUtil.convertAndValidateXml(Mockito.anyString(),Mockito.anyBoolean(),Mockito.anyList())).thenCallRealMethod();
+        Mockito.when(marcUtil.convertAndValidateXml(Mockito.anyString(),Mockito.anyBoolean(),Mockito.anyList(),Mockito.anyBoolean())).thenCallRealMethod();
         Mockito.when(marcUtil.convertMarcXmlToRecord(Mockito.anyString())).thenCallRealMethod();
         Map responseMap=new HashMap();
         responseMap.put("errorMessage",null);
@@ -1082,7 +1082,7 @@ public class SubmitCollectionServiceUT extends BaseTestCaseUT {
         Mockito.when(repositoryService.getReportDetailRepository()).thenCallRealMethod();
         Mockito.when(institutionDetailsRepository.findByInstitutionCode(Mockito.anyString())).thenReturn(getInstitutionEntity());
         ReflectionTestUtils.setField(marcUtil,"inputLimit",1);
-        Mockito.when(marcUtil.convertAndValidateXml(Mockito.anyString(),Mockito.anyBoolean(),Mockito.anyList())).thenCallRealMethod();
+        Mockito.when(marcUtil.convertAndValidateXml(Mockito.anyString(),Mockito.anyBoolean(),Mockito.anyList(), Mockito.anyBoolean())).thenCallRealMethod();
         Mockito.when(marcUtil.convertMarcXmlToRecord(Mockito.anyString())).thenCallRealMethod();
         Map responseMap=new HashMap();
         responseMap.put("errorMessage",null);
@@ -1142,7 +1142,7 @@ public class SubmitCollectionServiceUT extends BaseTestCaseUT {
         Mockito.when(repositoryService.getReportDetailRepository()).thenCallRealMethod();
         Mockito.when(institutionDetailsRepository.findByInstitutionCode(Mockito.anyString())).thenReturn(getInstitutionEntity());
         ReflectionTestUtils.setField(marcUtil,"inputLimit",1);
-        Mockito.when(marcUtil.convertAndValidateXml(Mockito.anyString(),Mockito.anyBoolean(),Mockito.anyList())).thenCallRealMethod();
+        Mockito.when(marcUtil.convertAndValidateXml(Mockito.anyString(),Mockito.anyBoolean(),Mockito.anyList(), Mockito.anyBoolean())).thenCallRealMethod();
         Mockito.when(marcUtil.convertMarcXmlToRecord(Mockito.anyString())).thenCallRealMethod();
         Map responseMap=new HashMap();
         StringBuilder stringBuilder=new StringBuilder();
@@ -1191,7 +1191,7 @@ public class SubmitCollectionServiceUT extends BaseTestCaseUT {
         Mockito.when(validationService.validateInstitution(Mockito.anyString())).thenReturn(true);
         ReflectionTestUtils.setField(marcUtil,"inputLimit",1);
         List<Future> futures = new ArrayList<>();
-        Mockito.when(marcUtil.convertAndValidateXml(Mockito.anyString(),Mockito.anyBoolean(),Mockito.anyList())).thenReturn(ScsbConstants.SUBMIT_COLLECTION_REJECTION_RECORD);
+        Mockito.when(marcUtil.convertAndValidateXml(Mockito.anyString(),Mockito.anyBoolean(),Mockito.anyList(), Mockito.anyBoolean())).thenReturn(ScsbConstants.SUBMIT_COLLECTION_REJECTION_RECORD);
         Mockito.when(institutionDetailsRepository.findByInstitutionCode(Mockito.anyString())).thenReturn(getInstitutionEntity());
         ReflectionTestUtils.setField(repositoryService,"institutionDetailsRepository",institutionDetailsRepository);
         Mockito.when(repositoryService.getInstitutionDetailsRepository()).thenCallRealMethod();
@@ -1207,7 +1207,7 @@ public class SubmitCollectionServiceUT extends BaseTestCaseUT {
         List<Integer> reportRecordNumList = new ArrayList<>();
         Mockito.when(validationService.validateInstitution(Mockito.anyString())).thenReturn(true);
         ReflectionTestUtils.setField(marcUtil,"inputLimit",1);
-        Mockito.when(marcUtil.convertAndValidateXml(Mockito.anyString(),Mockito.anyBoolean(),Mockito.anyList())).thenReturn(ScsbConstants.SUBMIT_COLLECTION_INTERNAL_ERROR);
+        Mockito.when(marcUtil.convertAndValidateXml(Mockito.anyString(),Mockito.anyBoolean(),Mockito.anyList(), Mockito.anyBoolean())).thenReturn(ScsbConstants.SUBMIT_COLLECTION_INTERNAL_ERROR);
         Mockito.when(institutionDetailsRepository.findByInstitutionCode(Mockito.anyString())).thenReturn(getInstitutionEntity());
         ReflectionTestUtils.setField(repositoryService,"institutionDetailsRepository",institutionDetailsRepository);
         Mockito.when(repositoryService.getInstitutionDetailsRepository()).thenCallRealMethod();
@@ -1242,7 +1242,7 @@ public class SubmitCollectionServiceUT extends BaseTestCaseUT {
         Mockito.when(institutionDetailsRepository.findByInstitutionCode(Mockito.anyString())).thenReturn(getInstitutionEntity());
         ReflectionTestUtils.setField(marcUtil,"inputLimit",1);
         ReflectionTestUtils.setField(submitCollectionService,"inputLimit",1);
-        Mockito.when(marcUtil.convertAndValidateXml(Mockito.anyString(),Mockito.anyBoolean(),Mockito.anyList())).thenCallRealMethod();
+        Mockito.when(marcUtil.convertAndValidateXml(Mockito.anyString(),Mockito.anyBoolean(),Mockito.anyList(), Mockito.anyBoolean())).thenCallRealMethod();
         Mockito.when(marcUtil.convertMarcXmlToRecord(Mockito.anyString())).thenCallRealMethod();
         Map responseMap=new HashMap();
         StringBuilder stringBuilder=new StringBuilder();
@@ -1298,7 +1298,7 @@ public class SubmitCollectionServiceUT extends BaseTestCaseUT {
         Mockito.when(institutionDetailsRepository.findByInstitutionCode(Mockito.anyString())).thenReturn(getInstitutionEntity());
         ReflectionTestUtils.setField(marcUtil,"inputLimit",1);
         ReflectionTestUtils.setField(submitCollectionService,"inputLimit",1);
-        Mockito.when(marcUtil.convertAndValidateXml(Mockito.anyString(),Mockito.anyBoolean(),Mockito.anyList())).thenCallRealMethod();
+        Mockito.when(marcUtil.convertAndValidateXml(Mockito.anyString(),Mockito.anyBoolean(),Mockito.anyList(), Mockito.anyBoolean())).thenCallRealMethod();
         Mockito.when(marcUtil.convertMarcXmlToRecord(Mockito.anyString())).thenCallRealMethod();
         Map responseMap=new HashMap();
         StringBuilder stringBuilder=new StringBuilder();

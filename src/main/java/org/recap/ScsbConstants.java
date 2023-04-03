@@ -28,6 +28,7 @@ public final class ScsbConstants {
     public static final String INVALID_MARC_XML_FORMAT_IN_SCSBXML_MESSAGE = "Invalid Marc xml content with in SCSB xml";
     public static final String SUBMIT_COLLECTION_INTERNAL_ERROR = "Internal error occured during submit collection";
     public static final String SUBMIT_COLLECTION_LIMIT_EXCEED_MESSAGE = "Maximum allowed input record is ";
+    public static final String SUBMIT_COLLECTION_CGD_NO_PROTECTION_LIMIT_EXCEED_MESSAGE = "Maximum allowed input record for cgd_no_protection is ";
     public static final String BIBRECORD_TAG = "<bibRecords>";
     public static final String SUBMIT_COLLECTION = "submitCollection";
     public static final String SUBMIT_COLLECTION_CGD_UPDATED = "submitCollection-cgd-updated";

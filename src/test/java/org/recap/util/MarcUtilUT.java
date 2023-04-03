@@ -437,14 +437,14 @@ public class MarcUtilUT extends BaseTestCaseUT {
     public void convertAndValidateXml() {
         List<Record> records = marcUtil.convertMarcXmlToRecord(marcXML);
         ReflectionTestUtils.setField(marcUtil, "inputLimit", 0);
-        String extractXmlAndSetEntityToMap = marcUtil.convertAndValidateXml(marcXML, true, records);
+        String extractXmlAndSetEntityToMap = marcUtil.convertAndValidateXml(marcXML, true, records, true);
         assertTrue(extractXmlAndSetEntityToMap.contains(ScsbConstants.SUBMIT_COLLECTION_LIMIT_EXCEED_MESSAGE));
     }
 
     @Test
     public void convertAndValidateXmlInvalid() {
         List<Record> records = marcUtil.convertMarcXmlToRecord(marcXML);
-        String extractXmlAndSetEntityToMap = marcUtil.convertAndValidateXml(marcXML, true, records);
+        String extractXmlAndSetEntityToMap = marcUtil.convertAndValidateXml(marcXML, true, records, true);
         assertTrue(extractXmlAndSetEntityToMap.contains(ScsbConstants.INVALID_MARC_XML_FORMAT_MESSAGE));
     }
 

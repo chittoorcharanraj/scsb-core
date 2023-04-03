@@ -335,7 +335,7 @@ public class SubmitCollectionProcessorUT extends BaseTestCaseUT {
         Mockito.when(incomingBibliographicEntity.getOwningInstitutionBibId()).thenReturn("d34645");
         Mockito.when(responseMap.get("bibliographicEntity")).thenReturn(incomingBibliographicEntity);
         Mockito.when(marcToBibEntityConverter.convert(any(), any())).thenReturn(responseMap);
-        Mockito.when(marcUtil.convertAndValidateXml(Mockito.anyString(),Mockito.anyBoolean(),Mockito.anyList())).thenCallRealMethod();
+        Mockito.when(marcUtil.convertAndValidateXml(Mockito.anyString(),Mockito.anyBoolean(),Mockito.anyList(), Mockito.anyBoolean())).thenCallRealMethod();
         Mockito.when(marcUtil.convertMarcXmlToRecord(Mockito.anyString())).thenCallRealMethod();
         Mockito.when(submitCollectionBatchService.getMarcToBibEntityConverter()).thenCallRealMethod();
         Mockito.when(setupDataService.getInstitutionCodeIdMap()).thenReturn(getMap());

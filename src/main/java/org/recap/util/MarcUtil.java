@@ -41,10 +41,11 @@ import java.util.Map;
 @Service
 public class MarcUtil {
 
-
-
     @Value("${" + PropertyKeyConstants.SUBMIT_COLLECTION_INPUT_LIMIT + "}")
     private Integer inputLimit;
+
+    @Value("${" + PropertyKeyConstants.SUBMIT_COLLECTION_CGD_NO_PROTECTION_INPUT_LIMIT + "}")
+    private Integer cgdNoProtectionInputLimit;
 
     /**
      * Convert marc xml to record list.
@@ -542,11 +543,14 @@ public class MarcUtil {
         return map;
     }
 
-    public String convertAndValidateXml(String inputRecords, boolean checkLimit, List<Record> records) {
+    public String convertAndValidateXml(String inputRecords, boolean checkLimit, List<Record> records, boolean isCGDProtected) {
         try {
             records.addAll(convertMarcXmlToRecord(inputRecords));
             if (checkLimit && records.size() > inputLimit) {
                 return ScsbConstants.SUBMIT_COLLECTION_LIMIT_EXCEED_MESSAGE + inputLimit;
+            }
+            if (!isCGDProtected && records.size()  > cgdNoProtectionInputLimit) {
+                return ScsbConstants.SUBMIT_COLLECTION_CGD_NO_PROTECTION_LIMIT_EXCEED_MESSAGE + " " + cgdNoProtectionInputLimit;
             }
         } catch (Exception e) {
             log.info(String.valueOf(e.getCause()));
