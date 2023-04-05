@@ -74,7 +74,7 @@ public class SetupDataServiceUT extends BaseTestCaseUT {
         Map<String,Integer> itemStatusCodeIdMap = setupDataService.getItemStatusCodeIdMap();
         assertNotNull(itemStatusCodeIdMap);
         Integer itemStatusId = itemStatusCodeIdMap.get(ScsbCommonConstants.AVAILABLE);
-        assertEquals(new Integer(1),itemStatusId);
+        assertEquals(Integer.valueOf(1),itemStatusId);
     }
 
     @Test
@@ -114,7 +114,7 @@ public class SetupDataServiceUT extends BaseTestCaseUT {
         Map<String,Integer> institutionEntityMapId = setupDataService.getInstitutionCodeIdMap();
         assertNotNull(institutionEntityMapId);
         Integer itemStatusId = institutionEntityMapId.get(ScsbCommonConstants.PRINCETON);
-        assertEquals(new Integer(1),itemStatusId);
+        assertEquals(Integer.valueOf(1),itemStatusId);
     }
 
     @Test
