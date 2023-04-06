@@ -889,7 +889,7 @@ public class SubmitCollectionServiceUT extends BaseTestCaseUT {
         String callNumber = savedBibliographicEntity.getItemEntities().get(0).getCallNumber();
         assertEquals("K25 .xN5",callNumber);
         Integer collectionGroupId = savedBibliographicEntity.getItemEntities().get(0).getCollectionGroupId();
-        assertEquals(new Integer(1),collectionGroupId);
+        assertEquals(Integer.valueOf(1),collectionGroupId);
     }
 
     @Test
@@ -1013,6 +1013,7 @@ public class SubmitCollectionServiceUT extends BaseTestCaseUT {
         List<Future> futures = new ArrayList<>();
         Mockito.when(reportDetailRepository.save(any())).thenReturn(savedReportEntity);
         Mockito.doCallRealMethod().when(submitCollectionReportHelperService).setSubmitCollectionFailureReportForUnexpectedException(any(),Mockito.anyList(),Mockito.anyString(), any());
+        ReflectionTestUtils.setField(marcUtil,"cgdNoProtectionInputLimit",20);
         List<SubmitCollectionResponse>  submitCollectionResponseList = submitCollectionService.process("PUL",updatedMarcForPUL,processedBibIds,Arrays.asList(idMapToRemoveIndex), Arrays.asList(bibIdMapToRemoveIndex), ScsbConstants.REST,reportRecordNumList, true,false,null, null,executorService,futures);
         assertEquals("Failed record - Item not updated - "+"Error while parsing xml for a barcode in submit collection",submitCollectionResponseList.get(0).getMessage());
     }
@@ -1065,6 +1066,7 @@ public class SubmitCollectionServiceUT extends BaseTestCaseUT {
         List<Future> futures = new ArrayList<>();
         Mockito.when(reportDetailRepository.save(any())).thenReturn(savedReportEntity);
         Mockito.doCallRealMethod().when(submitCollectionReportHelperService).setSubmitCollectionFailureReportForUnexpectedException(any(),Mockito.anyList(),Mockito.anyString(), any());
+        ReflectionTestUtils.setField(marcUtil,"cgdNoProtectionInputLimit",20);
         List<SubmitCollectionResponse>  submitCollectionResponseList = submitCollectionService.process("PUL",updatedMarcForPUL,processedBibIds,Arrays.asList(idMapToRemoveIndex), Arrays.asList(bibIdMapToRemoveIndex), ScsbConstants.REST,reportRecordNumList, true,false,null, null,executorService,futures);
         assertEquals("Failed record - Item not updated - ",submitCollectionResponseList.get(0).getMessage());
     }
@@ -1117,6 +1119,7 @@ public class SubmitCollectionServiceUT extends BaseTestCaseUT {
         List<Future> futures = new ArrayList<>();
         Mockito.when(reportDetailRepository.save(any())).thenReturn(savedReportEntity);
         Mockito.doCallRealMethod().when(submitCollectionReportHelperService).setSubmitCollectionFailureReportForUnexpectedException(any(),Mockito.anyList(),Mockito.anyString(), any());
+        ReflectionTestUtils.setField(marcUtil,"cgdNoProtectionInputLimit",20);
         List<SubmitCollectionResponse>  submitCollectionResponseList = submitCollectionService.process("PUL",updatedMarcForPUL,processedBibIds,Arrays.asList(idMapToRemoveIndex), Arrays.asList(bibIdMapToRemoveIndex), ScsbConstants.REST,reportRecordNumList, true,false,null, null,executorService,futures);
         assertEquals("Failed record - Item not updated - null",submitCollectionResponseList.get(0).getMessage());
     }
