@@ -384,7 +384,7 @@ public class SubmitCollectionReportHelperService {
         for(ItemEntity itemEntity:itemEntityList){
             barcodeList.add(itemEntity.getBarcode());
         }
-        return repositoryService.getItemDetailsRepository().findByBarcodeInAndComplete(barcodeList);
+        return repositoryService.getItemDetailsRepository().findByBarcodeInAndComplete(barcodeList,Boolean.FALSE);
     }
 
 

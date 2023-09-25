@@ -35,8 +35,8 @@ import org.springframework.util.StopWatch;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
-import javax.transaction.Transactional;
-import javax.xml.bind.JAXBException;
+import jakarta.transaction.Transactional;
+import jakarta.xml.bind.JAXBException;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;

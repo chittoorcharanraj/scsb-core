@@ -1,20 +1,18 @@
 package org.recap.model.jpa;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import org.recap.model.search.AbstractSearchItemResultRow;
 
 /**
  * Created by rajesh on 18-Jul-16.
  */
 @Data
-@ApiModel(value="SearchItemResultRow", description="Model for Displaying Item Result")
+@Schema(name="SearchItemResultRow", description="Model for Displaying Item Result")
 public class SearchItemResultRow extends AbstractSearchItemResultRow implements Comparable<SearchItemResultRow> {
 
-    @ApiModelProperty(name= "itemId", value= "Item Id",position = 8)
+    @Schema(name= "itemId", description= "Item Id",maxLength = 8)
     private Integer itemId;
 
     @Override

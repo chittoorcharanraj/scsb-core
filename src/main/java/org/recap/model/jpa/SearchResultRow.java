@@ -1,7 +1,6 @@
 package org.recap.model.jpa;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,44 +8,44 @@ import java.util.List;
 /**
  * Created by rajeshbabuk on 11/7/16.
  */
-@ApiModel(value="SearchResultRow", description="Model for Displaying Search Result")
+@Schema(name="SearchResultRow", description="Model for Displaying Search Result")
 public class SearchResultRow {
 
-    @ApiModelProperty(name= "bibId", value= "Bibliographic Id",position = 0)
+    @Schema(name= "bibId", description= "Bibliographic Id",maxLength = 0)
     private Integer bibId;
-    @ApiModelProperty(name= "title", value= "Book Title",position = 1)
+    @Schema(name= "title", description= "Book Title",maxLength = 1)
     private String title;
-    @ApiModelProperty(name= "author", value= "Author",position = 2)
+    @Schema(name= "author", description= "Author",maxLength = 2)
     private String author;
-    @ApiModelProperty(name= "publisher", value= "Publisher",position = 3)
+    @Schema(name= "publisher", description= "Publisher",maxLength = 3)
     private String publisher;
-    @ApiModelProperty(name= "publisherDate", value= "Publisher Date",position = 4)
+    @Schema(name= "publisherDate", description= "Publisher Date",maxLength = 4)
     private String publisherDate;
-    @ApiModelProperty(name= "owningInstitution", value= "Owning Institution",position = 5)
+    @Schema(name= "owningInstitution", description= "Owning Institution",maxLength = 5)
     private String owningInstitution;
-    @ApiModelProperty(name= "customerCode", value= "Customer Code",position = 6)
+    @Schema(name= "customerCode", description= "Customer Code",maxLength = 6)
     private String customerCode;
-    @ApiModelProperty(name= "collectionGroupDesignation", value= "Collection Group Designation",position = 7)
+    @Schema(name= "collectionGroupDesignation", description= "Collection Group Designation",maxLength = 7)
     private String collectionGroupDesignation;
-    @ApiModelProperty(name= "useRestriction", value= "use Restriction",position = 8)
+    @Schema(name= "useRestriction", description= "use Restriction",maxLength = 8)
     private String useRestriction;
-    @ApiModelProperty(name= "barcode", value= "barcode",position = 9)
+    @Schema(name= "barcode", description= "barcode",maxLength = 9)
     private String barcode;
-    @ApiModelProperty(name= "summary Holdings", value= "summary Holdings",position = 10)
+    @Schema(name= "summary Holdings", description= "summary Holdings",maxLength = 10)
     private String summaryHoldings;
-    @ApiModelProperty(name= "availability", value= "availability",position = 11)
+    @Schema(name= "availability", description= "availability",maxLength = 11)
     private String availability;
-    @ApiModelProperty(name= "leaderMaterialType", value= "Leader Material Type",position = 12)
+    @Schema(name= "leaderMaterialType", description= "Leader Material Type",maxLength = 12)
     private String leaderMaterialType;
-    @ApiModelProperty(name= "selected", value= "selected",position = 13)
+    @Schema(name= "selected", description= "selected",maxLength = 13)
     private boolean selected = false;
-    @ApiModelProperty(name= "showItems", value= "Show Items",position = 14)
+    @Schema(name= "showItems", description= "Show Items",maxLength = 14)
     private boolean showItems = false;
-    @ApiModelProperty(name= "selectAllItems", value= "Select All Items",position = 15)
+    @Schema(name= "selectAllItems", description= "Select All Items",maxLength = 15)
     private boolean selectAllItems = false;
-    @ApiModelProperty(name= "searchItemResultRows", value= "Item Results",position = 16)
+    @Schema(name= "searchItemResultRows", description= "Item Results",maxLength = 16)
     private List<SearchItemResultRow> searchItemResultRows = new ArrayList<>();
-    @ApiModelProperty(name= "itemId", value= "Item Id",position = 17)
+    @Schema(name= "itemId", description= "Item Id",maxLength = 17)
     private Integer itemId;
 
     private Integer patronBarcode;

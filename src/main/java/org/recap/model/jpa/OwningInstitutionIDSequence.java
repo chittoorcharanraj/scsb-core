@@ -1,6 +1,6 @@
 package org.recap.model.jpa;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 /**
  * Created by premkb on 16/8/17.
