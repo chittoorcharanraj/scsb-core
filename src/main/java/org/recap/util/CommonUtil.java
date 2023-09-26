@@ -20,9 +20,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Unmarshaller;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
@@ -284,7 +284,7 @@ public class CommonUtil {
     public BibRecords getBibRecordsForSCSBFormat(String unmarshal) {
         BibRecords bibRecords = null;
         try {
-             bibRecords = extractBibRecords(unmarshal);
+            bibRecords = extractBibRecords(unmarshal);
         } catch (JAXBException e) {
             log.error(ScsbCommonConstants.LOG_ERROR,e);
         }
@@ -429,7 +429,7 @@ public class CommonUtil {
     public boolean compareMatchPointsByMarcXml(String incomingMarcXml, String existingMarcXml, String institutionCode) {
         List<Record> incomingMarcRecords = marcUtil.convertMarcXmlToRecord(incomingMarcXml);
         List<Record> existingMarcRecords = marcUtil.convertMarcXmlToRecord(existingMarcXml);
-       return compareMatchPoints(incomingMarcRecords.get(0), existingMarcRecords.get(0), institutionCode);
+        return compareMatchPoints(incomingMarcRecords.get(0), existingMarcRecords.get(0), institutionCode);
     }
 
     public boolean compareMatchPoints(Record incomingMarcRecord, Record existingMarcRecord, String institutionCode) {
@@ -474,7 +474,7 @@ public class CommonUtil {
     }
 
     public boolean isCgdAlreadyShared(Map<String, ItemEntity> fetchedBarcodeItemEntityMap, Map<String, ItemEntity> incomingBarcodeItemEntityMap, Map<Integer, String> collectionGroupIdCodeMap, Map<Integer, String> itemStatusIdCodeMap) {
-       return isCgdChangedToShared(fetchedBarcodeItemEntityMap, incomingBarcodeItemEntityMap, collectionGroupIdCodeMap, itemStatusIdCodeMap, true);
+        return isCgdChangedToShared(fetchedBarcodeItemEntityMap, incomingBarcodeItemEntityMap, collectionGroupIdCodeMap, itemStatusIdCodeMap, true);
     }
 
     public void collectSharedAndNonSharedBibIdsForMatchingId(Set<Integer> sharedBibIds, Set<Integer> nonSharedBibIds, String matchingIdentifier, Map<Integer, String> collectionGroupIdCodeMap) {

@@ -28,8 +28,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StopWatch;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -1286,7 +1286,7 @@ public class SubmitCollectionDAOService {
         if(institutionEntityOptional.isPresent()) {
             institutionCode = institutionEntityOptional.get().getInstitutionCode();
         }
-       isItemLibraryRequired = Boolean.parseBoolean(itemLibraryPropertyMap.get(institutionCode));
+        isItemLibraryRequired = Boolean.parseBoolean(itemLibraryPropertyMap.get(institutionCode));
 
         if(itemEntity.getItemLibrary() != null) {
             fetchItemEntity.setItemLibrary(itemEntity.getItemLibrary());
