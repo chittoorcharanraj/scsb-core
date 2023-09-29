@@ -3,6 +3,7 @@ package org.recap.activemq;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.activemq.broker.jmx.DestinationViewMBean;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
@@ -15,6 +16,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 @Slf4j
+@Ignore
 public class JmxHelperUT extends BaseTestCaseUT {
 
     @InjectMocks

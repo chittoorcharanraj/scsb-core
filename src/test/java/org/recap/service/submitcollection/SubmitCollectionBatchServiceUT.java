@@ -25,7 +25,7 @@ import org.recap.util.CommonUtil;
 import org.recap.util.MarcUtil;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import javax.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;

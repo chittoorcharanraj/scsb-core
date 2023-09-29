@@ -38,7 +38,7 @@ public class ItemControllerUT extends BaseTestCaseUT {
 
     @Test
     public void testItemDetails() throws Exception {
-        Mockito.when(itemDetailsRepository.findByBarcodeInAndComplete(Mockito.anyList())).thenReturn(saveBibSingleHoldingsMultipleItem().getItemEntities());
+        Mockito.when(itemDetailsRepository.findByBarcodeInAndComplete(Mockito.anyList(), Mockito.anyBoolean())).thenReturn(saveBibSingleHoldingsMultipleItem().getItemEntities());
         List<ItemEntity> itemEntityList = itemController.findByBarcodeIn("00009,00010");
         assertNotNull(itemEntityList);
         assertEquals(2,itemEntityList.size());
