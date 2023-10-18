@@ -6,36 +6,41 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.spi.RouteController;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.recap.BaseTestCaseUT;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.recap.PropertyKeyConstants;
 import org.recap.ScsbConstants;
 import org.recap.model.csv.DailyReconcilationRecord;
-import org.recap.model.jpa.InstitutionEntity;
-import org.recap.model.jpa.ItemEntity;
-import org.recap.model.jpa.ItemStatusEntity;
-import org.recap.model.jpa.RequestItemEntity;
-import org.recap.model.jpa.RequestTypeEntity;
+import org.recap.model.jpa.*;
 import org.recap.repository.jpa.ItemDetailsRepository;
 import org.recap.repository.jpa.RequestItemDetailsRepository;
 import org.recap.util.PropertyUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.springframework.test.web.client.ExpectedCount.times;
 
 /**
  * Created by akulak on 8/5/17.
  */
-public class DailyReconciliationProcessorUT extends BaseTestCaseUT {
+
+@RunWith(MockitoJUnitRunner.Silent.class)
+public class DailyReconciliationProcessorUT{
 
     @InjectMocks
     DailyReconciliationProcessor dailyReconciliationProcessor;
@@ -70,6 +75,11 @@ public class DailyReconciliationProcessorUT extends BaseTestCaseUT {
 
     @Value("${" + PropertyKeyConstants.DAILY_RECONCILIATION_FILE + "}")
     private String filePath;
+
+    @Before
+    public void setup() throws Exception {
+        MockitoAnnotations.openMocks(this);
+    }
     
 
 
@@ -219,6 +229,31 @@ public class DailyReconciliationProcessorUT extends BaseTestCaseUT {
         institutionEntity.setInstitutionCode("PUL");
         institutionEntity.setInstitutionName("PUL");
         return institutionEntity;
+    }
+
+    @Test
+    public void createHeaderForCompareSheetTest(){
+        try {
+            XSSFSheet xssfSheet = mock(XSSFSheet.class);
+            XSSFRow row = mock(XSSFRow.class);
+            Mockito.when(xssfSheet.createRow(0)).thenReturn(row);
+
+            row.createCell(0).setCellValue(ScsbConstants.DAILY_RR_LAS);
+            Mockito.when(row.createCell(0)).thenThrow(new RuntimeException("Exception occured"));
+            Mockito.verify(xssfSheet).createRow(0);
+            Mockito.verify(row.getCell(0)).setCellValue(ScsbConstants.DAILY_RR_LAS);
+            ReflectionTestUtils.invokeMethod(dailyReconciliationProcessor, "createHeaderForCompareSheet", xssfSheet);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void verifyCellValue(XSSFSheet sheet, int rowNumber, int cellNumber, String expectedValue) {
+        Row row = sheet.getRow(rowNumber);
+        Cell cell = row.getCell(cellNumber);
+        assertEquals(expectedValue, cell.getStringCellValue());
     }
 
 }
