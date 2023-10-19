@@ -9,10 +9,14 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.spi.RouteController;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.recap.BaseTestCaseUT;
 import org.recap.model.ILSConfigProperties;
 import org.recap.util.CommonUtil;
@@ -26,7 +30,8 @@ import java.util.List;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 
-public class SubmitCollectionPollingS3RouteBuilderUT extends BaseTestCaseUT {
+@RunWith(MockitoJUnitRunner.Silent.class)
+public class SubmitCollectionPollingS3RouteBuilderUT  {
 
     @InjectMocks
     SubmitCollectionPollingS3RouteBuilder submitCollectionPollingS3RouteBuilder;
@@ -63,6 +68,11 @@ public class SubmitCollectionPollingS3RouteBuilderUT extends BaseTestCaseUT {
 
     @Mock
     ProducerTemplate producer;
+
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void createRoutesForSubmitCollection() throws Exception {

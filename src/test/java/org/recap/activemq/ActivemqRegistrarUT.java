@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.recap.BaseTestCaseUT;
 
-import javax.jms.JMSException;
+import jakarta.jms.JMSException;
 
 import static org.junit.Assert.assertNotNull;
 

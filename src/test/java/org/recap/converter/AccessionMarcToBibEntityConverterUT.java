@@ -1,13 +1,11 @@
 package org.recap.converter;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.Before;
 import org.junit.Test;
 import org.marc4j.marc.Leader;
 import org.marc4j.marc.Record;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.Spy;
+import org.mockito.*;
 import org.recap.BaseTestCaseUT;
 import org.recap.ScsbCommonConstants;
 import org.recap.model.accession.AccessionRequest;
@@ -20,6 +18,7 @@ import org.recap.model.marc.HoldingsMarcRecord;
 import org.recap.model.marc.ItemMarcRecord;
 import org.recap.repository.jpa.BibliographicDetailsRepository;
 import org.recap.util.*;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.io.File;
 import java.net.URL;
@@ -76,6 +75,13 @@ public class AccessionMarcToBibEntityConverterUT extends BaseTestCaseUT {
     @InjectMocks
     @Spy
     AccessionUtil accessionUtil;
+    @Mock
+    Map<String, Object> bibMap;
+
+    @Before
+    public void setup() throws Exception {
+        MockitoAnnotations.openMocks(this);
+    }
 
     @Test
     public void convert() throws Exception {

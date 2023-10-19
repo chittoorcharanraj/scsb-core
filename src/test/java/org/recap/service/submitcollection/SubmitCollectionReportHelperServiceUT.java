@@ -29,6 +29,7 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Date;
 import static org.junit.Assert.assertNotNull;
+import static org.mockito.ArgumentMatchers.eq;
 
 
 /**
@@ -157,7 +158,6 @@ public class SubmitCollectionReportHelperServiceUT extends BaseTestCaseUT {
         assertNotNull(failureSubmitCollectionReportInfoList);
     }
 
-    @Ignore
     public void buildSubmitCollectionReportInfo(){
         Map institutionEntityMap = new HashMap();
         institutionEntityMap.put(5,"Available");
@@ -391,7 +391,7 @@ public class SubmitCollectionReportHelperServiceUT extends BaseTestCaseUT {
         List<String> barcodes = new ArrayList<>();
         barcodes.add("123456");
         Mockito.when(repositoryService.getItemDetailsRepository()).thenReturn(itemDetailsRepository);
-        Mockito.when(repositoryService.getItemDetailsRepository().findByBarcodeInAndComplete(barcodes)).thenReturn(itemEntityList);
+        Mockito.when(repositoryService.getItemDetailsRepository().findByBarcodeInAndComplete(barcodes, eq(Mockito.anyBoolean()))).thenReturn(itemEntityList);
         List<ItemEntity> itemEntities = submitCollectionReportHelperService.getIncomingItemIsComplete(itemEntityList);
         assertNotNull(itemEntities);
     }

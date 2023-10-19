@@ -8,10 +8,14 @@ import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.spi.RouteController;
 import org.apache.camel.support.DefaultExchange;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.recap.BaseTestCaseUT;
 import org.recap.PropertyKeyConstants;
 import org.recap.ScsbCommonConstants;
@@ -36,8 +40,8 @@ import java.util.*;
 
 import static org.apache.camel.builder.Builder.simple;
 
-
-public class AccessionReconciliationProcessorUT extends BaseTestCaseUT {
+@RunWith(MockitoJUnitRunner.Silent.class)
+public class AccessionReconciliationProcessorUT  {
     @InjectMocks
     AccessionReconciliationProcessor mockedAccessionReconciliationProcessor;
 
@@ -64,6 +68,11 @@ public class AccessionReconciliationProcessorUT extends BaseTestCaseUT {
 
     @Value("${" + PropertyKeyConstants.ACCESSION_RECONCILIATION_FILEPATH + "}")
     String accessionFilePath;
+
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @AfterTestMethod
     public void finall() throws IOException {

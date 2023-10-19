@@ -5,14 +5,13 @@ import org.junit.Test;
 import org.recap.ScsbCommonConstants;
 import org.springframework.test.web.servlet.MvcResult;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Ignore
 public class SubmitCollectionJobControllerIT extends BaseControllerUT{
+
 
     @Test
     public void teststartSubmitCollection() throws Exception{

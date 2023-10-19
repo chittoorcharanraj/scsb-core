@@ -31,7 +31,7 @@ import org.recap.util.PropertyUtil;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 
 
 import java.util.ArrayList;
@@ -502,7 +502,7 @@ public class SubmitCollectionDAOServiceUT extends BaseTestCaseUT {
         Mockito.when(repositoryService.getBibliographicDetailsRepository()).thenReturn(bibliographicDetailsRepository);
         Mockito.when(submitCollectionValidationService.isExistingBoundWithItem(itemEntity.get(0))).thenReturn(false);
         Mockito.when(repositoryService.getBibliographicDetailsRepository()).thenReturn(bibliographicDetailsRepository);
-        Mockito.doNothing().when(bibliographicDetailsRepository).delete(any());
+//        Mockito.doNothing().when(bibliographicDetailsRepository).delete(any());
         Mockito.doNothing().when(bibliographicDetailsRepository).flush();
         Mockito.when(bibliographicDetailsRepository.saveAndFlush(any())).thenReturn(incomingBibliographicEntity);
         Mockito.when(repositoryService.getBibliographicDetailsRepository().findByOwningInstitutionIdAndOwningInstitutionBibId(Mockito.anyInt(),Mockito.anyString())).thenReturn(getBibliographicEntity("1577261074"));
