@@ -1,5 +1,6 @@
 package org.recap.service.authorization;
 
+import org.apache.commons.codec.binary.Base64;
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -7,7 +8,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Base64Utils;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -23,7 +23,7 @@ public class OauthTokenApiService {
      * @throws Exception the exception
      */
     public String generateAccessToken(String oauthTokenApiUrl, String operatorUserId, String operatorPassword) throws Exception {
-        String authorization = "Basic " + new String(Base64Utils.encode((operatorUserId + ":" + operatorPassword).getBytes()));
+        String authorization = "Basic " + new String(Base64.encodeBase64((operatorUserId + ":" + operatorPassword).getBytes()));
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         headers.set("Authorization", authorization);
