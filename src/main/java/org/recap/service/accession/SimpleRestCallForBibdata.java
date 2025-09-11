@@ -85,10 +85,9 @@ public class SimpleRestCallForBibdata extends BibDataAbstract{
     public HttpHeaders getHttpHeaders(String ilsBearerApiKey)  {
         String authorization = "Bearer " + ilsBearerApiKey;
         HttpHeaders headers = new HttpHeaders();
-      //  headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_XML));
         headers.set("Authorization", authorization);
-        log.info("headers >>>>>> " + headers);
         return headers;
     }
 
