@@ -340,7 +340,7 @@ public class AccessionProcessService {
             ILSConfigProperties ilsConfigProperties = propertyUtil.getILSConfigProperties(owningInstitutionId);
             if ("REST".equalsIgnoreCase(ilsConfigProperties.getIlsRefileEndpointProtocol())) {
                 HttpEntity request = new HttpEntity<>(getHttpHeadersAuth());
-                UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(scsbUrl + ScsbConstants.SERVICEPATH.REFILE_ITEM_IN_ILS);
+                UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(scsbUrl + ScsbConstants.SERVICEPATH.REFILE_ITEM_IN_ILS);
                 builder.queryParam(ScsbCommonConstants.ITEMBARCODE, itemBarcode);
                 builder.queryParam(ScsbConstants.OWNING_INST, owningInstitutionId);
                 StopWatch stopWatch = new StopWatch();
