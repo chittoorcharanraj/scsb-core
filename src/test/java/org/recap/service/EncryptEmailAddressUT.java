@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.recap.model.jpa.*;
 import org.recap.repository.jpa.RequestItemDetailsRepository;
 import org.recap.repository.jpa.RequestItemStatusDetailsRepository;
@@ -24,7 +25,7 @@ import static org.junit.Assert.assertNotNull;
 /**
  * Created by akulak on 20/9/17.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(MockitoJUnitRunner.Silent.class)
 public class EncryptEmailAddressUT {
 
    @InjectMocks

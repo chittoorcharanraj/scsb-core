@@ -1,13 +1,17 @@
 package org.recap.model.submitcollection;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.marc4j.marc.Record;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.recap.BaseTestCase;
 import org.recap.util.BibJSONUtil;
 import org.recap.util.CommonUtil;
 import org.recap.util.MarcUtil;
+import org.springframework.stereotype.Service;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.ArrayList;
@@ -20,7 +24,9 @@ import static org.mockito.ArgumentMatchers.any;
 /**
  * Created by rajeshbabuk on 17/Sep/2021
  */
-public class BibMatchPointInfoTest extends BaseTestCase {
+
+@RunWith(MockitoJUnitRunner.class)
+public class BibMatchPointInfoTest{
 
     @Mock
     private CommonUtil commonUtil;

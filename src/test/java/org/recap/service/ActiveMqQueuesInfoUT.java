@@ -1,10 +1,10 @@
 package org.recap.service;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
 import org.recap.BaseTestCaseUT;
-import org.recap.PropertyKeyConstants;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import static org.junit.Assert.assertEquals;
@@ -12,27 +12,21 @@ import static org.junit.Assert.assertEquals;
 public class ActiveMqQueuesInfoUT extends BaseTestCaseUT {
 
     @InjectMocks
-    ActiveMqQueuesInfo activeMqQueuesInfo;
+    private ActiveMqQueuesInfo activeMqQueuesInfo;
 
-    @Value("${" + PropertyKeyConstants.ACTIVEMQ_JOLOKIA_API_URL + "}")
-    private String activeMqApiUrl;
+    @Before
+    public void setup() {
+        MockitoAnnotations.openMocks(this);
 
-    @Value("${" + PropertyKeyConstants.ACTIVEMQ_JOLOKIA_API_QUEUE_SIZE_ATTRIBUTE + "}")
-    private String searchAttribute;
-
-    @Value("${" + PropertyKeyConstants.ACTIVEMQ_WEB_CONSOLE_URL + "}")
-    private String serviceUrl;
-
-    @Value("${" + PropertyKeyConstants.ACTIVEMQ_CREDENTIALS + "}")
-    private String activemqCredentials;
+        ReflectionTestUtils.setField(activeMqQueuesInfo, "serviceUrl", "http://localhost:8161/admin");
+        ReflectionTestUtils.setField(activeMqQueuesInfo, "activemqCredentials", "admin:admin");
+        ReflectionTestUtils.setField(activeMqQueuesInfo, "activeMqApiUrl", "http://localhost:8161/api/jolokia");
+        ReflectionTestUtils.setField(activeMqQueuesInfo, "searchAttribute", "QueueSize");
+    }
 
     @Test
-    public void getActivemqQueuesInfo(){
-        ReflectionTestUtils.setField(activeMqQueuesInfo,"serviceUrl",serviceUrl);
-        ReflectionTestUtils.setField(activeMqQueuesInfo,"activemqCredentials",activemqCredentials);
-        ReflectionTestUtils.setField(activeMqQueuesInfo,"activeMqApiUrl",activeMqApiUrl);
-        ReflectionTestUtils.setField(activeMqQueuesInfo,"searchAttribute",searchAttribute);
-        int queueSizeCount= activeMqQueuesInfo.getActivemqQueuesInfo("test");
-        assertEquals(0,queueSizeCount);
+    public void getActivemqQueuesInfo() {
+        int queueSizeCount = activeMqQueuesInfo.getActivemqQueuesInfo("test");
+        assertEquals(0, queueSizeCount);
     }
 }

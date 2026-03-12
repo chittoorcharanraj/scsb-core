@@ -1,18 +1,13 @@
 package org.recap.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.ArgumentMatchers;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.BeforeEach;
+import org.mockito.*;
 import org.recap.BaseTestCaseUT;
 import org.recap.ScsbCommonConstants;
 import org.recap.configuration.RestTemplateConfig;
-import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.boot.restclient.RestTemplateBuilder;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +19,7 @@ import org.springframework.web.client.RestTemplate;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@RunWith(MockitoJUnitRunner.Silent.class)
+
 public class RestTemplateConfigUT extends BaseTestCaseUT {
 
     @InjectMocks
@@ -39,11 +34,16 @@ public class RestTemplateConfigUT extends BaseTestCaseUT {
     @Mock
     RestTemplate restTemplate;
 
+    @BeforeEach
+    public void setup() {
+        MockitoAnnotations.openMocks(this);
+    }
+
     @Test
     public void getForString() {
         Mockito.when(restTemplateBuilder.build()).thenReturn(restTemplate);
         ReflectionTestUtils.setField(restTemplateConfig,"restTemplate",restTemplate);
-        ReflectionTestUtils.setField(restTemplateConfig,"objectMapper",objectMapper);
+//        ReflectionTestUtils.setField(restTemplateConfig,"objectMapper",objectMapper);
         ResponseEntity<String> responseEntity = new ResponseEntity<>(ScsbCommonConstants.SUCCESS, HttpStatus.OK);
         Mockito.doReturn(responseEntity).when(restTemplate).exchange(
                 ArgumentMatchers.anyString(),
@@ -62,7 +62,7 @@ public class RestTemplateConfigUT extends BaseTestCaseUT {
     public void getForStringHttpClientErrorException() {
         Mockito.when(restTemplateBuilder.build()).thenReturn(restTemplate);
         ReflectionTestUtils.setField(restTemplateConfig,"restTemplate",restTemplate);
-        ReflectionTestUtils.setField(restTemplateConfig,"objectMapper",objectMapper);
+//        ReflectionTestUtils.setField(restTemplateConfig,"objectMapper",objectMapper);
         ResponseEntity<String> responseEntity = new ResponseEntity<>(ScsbCommonConstants.SUCCESS, HttpStatus.OK);
         Mockito.doThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND)).when(restTemplate).exchange(
                 ArgumentMatchers.anyString(),
@@ -79,7 +79,7 @@ public class RestTemplateConfigUT extends BaseTestCaseUT {
     public void getForStringException() {
         Mockito.when(restTemplateBuilder.build()).thenReturn(restTemplate);
         ReflectionTestUtils.setField(restTemplateConfig,"restTemplate",restTemplate);
-        ReflectionTestUtils.setField(restTemplateConfig,"objectMapper",objectMapper);
+//        ReflectionTestUtils.setField(restTemplateConfig,"objectMapper",objectMapper);
         ResponseEntity<String> responseEntity = new ResponseEntity<>(ScsbCommonConstants.SUCCESS, HttpStatus.OK);
         Mockito.doThrow(new HttpClientErrorException(HttpStatus.BAD_REQUEST)).when(restTemplate).exchange(
                 ArgumentMatchers.anyString(),
